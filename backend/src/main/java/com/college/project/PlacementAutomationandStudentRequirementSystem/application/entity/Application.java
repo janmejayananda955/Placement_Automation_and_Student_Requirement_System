@@ -21,9 +21,11 @@ public class Application {
     private UUID id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ApplicationStatus status;
 
     @CurrentTimestamp
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne

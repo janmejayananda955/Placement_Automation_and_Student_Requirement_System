@@ -2,6 +2,7 @@ package com.college.project.PlacementAutomationandStudentRequirementSystem.appli
 
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationSummaryDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.UpdateStatusRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.service.impl.ApplicationServiceImpl;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/applications")
@@ -19,22 +21,28 @@ public class ApplicationController {
     private final ApplicationServiceImpl applicationService;
 
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<?>> applyJob(@RequestBody ApplicationRequestDto applicationRequestDto) {
+    @PostMapping    //STUDENT
+    public ResponseEntity<ApiResponse<?>> applyJobApplication(@RequestBody ApplicationRequestDto applicationRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(applicationService.createApplication(applicationRequestDto));
     }
 
-    //        @PutMapping("/{id}/status")
-//        public ResponseEntity<?> updateStatus(){}
-//
-    @GetMapping
+    @PutMapping("/{id}/status") //RECRUITER
+    public ResponseEntity<ApiResponse<?>> updateStatus(@PathVariable UUID id, @RequestBody UpdateStatusRequestDto updateStatusRequestDto) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(applicationService.updateApplicationStatus(id, updateStatusRequestDto));
+    }
+
+    @GetMapping     //ADMIN
     public ResponseEntity<ApiResponse<List<ApplicationSummaryDto>>> getAllApplications() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(applicationService.getAllApplications());
     }
-//        @DeleteMapping("/{id}")
-//        public ResponseEntity<?> withdrawApplication(){}
-//
+        @DeleteMapping("/{id}")
+        public ResponseEntity<ApiResponse<?>> withdrawApplication(@PathVariable UUID id){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(applicationService.widhdrawApplication(id));
+        }
+
 
 }

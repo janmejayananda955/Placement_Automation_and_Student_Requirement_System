@@ -10,3 +10,9 @@ to add
 }
 
 2. remove temporary id from job controller
+3. add updatedAt on application to provide user in which time status updated
+4. Security-->
+    >basic validation Using @valid
+    >Role based validation
+    >jwt / secret
+5. other api work and any new api if needed

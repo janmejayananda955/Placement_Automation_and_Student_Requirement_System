@@ -1,6 +1,7 @@
 package com.college.project.PlacementAutomationandStudentRequirementSystem.user.entity;
 
 import com.college.project.PlacementAutomationandStudentRequirementSystem.role.entity.Role;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.student.entity.Student;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,4 +42,7 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToOne(mappedBy = "user")
+    private Student student;
 }
