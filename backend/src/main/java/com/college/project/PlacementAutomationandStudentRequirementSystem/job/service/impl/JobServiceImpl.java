@@ -1,5 +1,7 @@
 package com.college.project.PlacementAutomationandStudentRequirementSystem.job.service.impl;
 
+import com.college.project.PlacementAutomationandStudentRequirementSystem.company.entity.Company;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.company.repository.CompanyRepository;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.exception.ResourceAlreadyExistsException;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.exception.ResourceNotFoundException;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.job.dto.JobRequestDto;
@@ -22,16 +24,24 @@ public class JobServiceImpl implements JobService {
 
     private final JobRepository jobRepository;
     private final ModelMapper modelMapper;
+    private final CompanyRepository companyRepository;
 
     @Override
-    public ApiResponse<?> createJob(JobRequestDto jobRequestDto) {
+    public ApiResponse<?> createJob(Long id, JobRequestDto jobRequestDto) {
         //check if same job exists or not
         if (jobRepository.existsByRoleAndDeadline(jobRequestDto.getRole(),jobRequestDto.getDeadline())){
             throw  new ResourceAlreadyExistsException("Same job already registered for the role "+
                     jobRequestDto.getRole()+" with the same deadline "+jobRequestDto.getDeadline());
         }
+
+        // get company
+        Company company =companyRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("Company not found"));
+
+
         Job job = modelMapper.map(jobRequestDto, Job.class);
         job.setJobStatus(JobStatus.open); // mark as job open user can apply
+        job.setCompany(company);
         jobRepository.save(job);
         return new ApiResponse<>("Job created successfully",null);
     }

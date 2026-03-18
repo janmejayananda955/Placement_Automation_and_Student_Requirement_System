@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface JobService {
-    ApiResponse<?> createJob(JobRequestDto jobRequestDto);
+    //temp id
+    ApiResponse<?> createJob(Long id, JobRequestDto jobRequestDto);
 
     ApiResponse<?> updateJobProfile(UUID id, JobRequestDto jobRequestDto);
 

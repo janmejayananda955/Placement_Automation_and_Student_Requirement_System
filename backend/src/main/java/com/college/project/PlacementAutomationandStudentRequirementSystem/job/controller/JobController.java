@@ -18,10 +18,10 @@ import java.util.UUID;
 public class JobController {
     private final JobServiceImpl jobService;
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<?>> createJob(@RequestBody JobRequestDto jobRequestDto){
+    @PostMapping("{id}")
+    public ResponseEntity<ApiResponse<?>> createJob(@PathVariable Long id ,@RequestBody JobRequestDto jobRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(jobService.createJob(jobRequestDto));
+                .body(jobService.createJob(id,jobRequestDto));
     }
 
     @PutMapping("/{id}")
@@ -37,13 +37,13 @@ public class JobController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JobResponseDto>> getJobs(){
+    public ResponseEntity<List<JobResponseDto>> getAllJobs(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(jobService.getAllJobs());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JobResponseDto> getJob(@PathVariable UUID id){
+    public ResponseEntity<JobResponseDto> getJobById(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(jobService.getJobById(id));
     }

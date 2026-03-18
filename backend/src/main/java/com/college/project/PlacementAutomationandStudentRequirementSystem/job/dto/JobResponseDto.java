@@ -1,5 +1,7 @@
 package com.college.project.PlacementAutomationandStudentRequirementSystem.job.dto;
 
+import com.college.project.PlacementAutomationandStudentRequirementSystem.company.dto.CompanyResponseDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.company.entity.Company;
 import lombok.*;
 
 import java.time.LocalDate;

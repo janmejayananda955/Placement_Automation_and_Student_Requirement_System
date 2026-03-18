@@ -8,3 +8,5 @@ to add
     2. show this when user as student and for admin don't show
     GET /jobs/{id} or for this which will prefer
 }
+
+2. remove temporary id from job controller
