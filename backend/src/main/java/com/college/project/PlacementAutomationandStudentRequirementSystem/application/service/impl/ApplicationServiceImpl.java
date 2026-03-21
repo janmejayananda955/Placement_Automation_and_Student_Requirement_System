@@ -11,9 +11,6 @@ import com.college.project.PlacementAutomationandStudentRequirementSystem.except
 import com.college.project.PlacementAutomationandStudentRequirementSystem.exception.ResourceNotFoundException;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.job.entity.Job;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.job.repository.JobRepository;
-import com.college.project.PlacementAutomationandStudentRequirementSystem.role.entity.Role;
-import com.college.project.PlacementAutomationandStudentRequirementSystem.student.entity.Student;
-import com.college.project.PlacementAutomationandStudentRequirementSystem.student.repository.StudentRepository;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.user.entity.User;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.user.repository.UserRepository;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;

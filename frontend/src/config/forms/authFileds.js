@@ -38,3 +38,27 @@ export const registerFields = [
     required: true,
   },
 ];
+
+export const loginHeaderAndFooterConfig = {
+  header: {
+    title: "Sign in",
+    subtitle: "Sign in below to access your account",
+  },
+  footer: {
+    text: "Don’t have an account yet?",
+    linkText: "Sign up",
+    link: "/register",
+  },
+};
+
+export const registerHeaderAndFooterConfig = {
+  header: {
+    title: "Create Account",
+    subtitle: "Fill details to register",
+  },
+  footer: {
+    text: "Already have an account?",
+    linkText: "Sign in",
+    link: "/login",
+  },
+};

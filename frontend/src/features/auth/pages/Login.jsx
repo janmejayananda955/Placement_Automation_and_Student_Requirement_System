@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/Button";
 import { Input } from "../../../components/ui/Input";
 import { Form } from "../../../components/ui/Form";
-import { LoginHeader } from "../../../components/ui/FormHeader";
+import { FormHeader } from "../../../components/ui/FormHeader";
 import { FormFooter } from "../../../components/ui/FormFooter";
 import { loginFields } from "../../../config/forms/authFileds";
 import { toast } from "react-toastify";
@@ -37,7 +37,6 @@ export default function LoginPage() {
       console.log(res);
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful");
-
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -46,10 +45,11 @@ export default function LoginPage() {
         toast.error("Server not reachable or CROS blocked");
       } else if (err.response.status === 401) {
         toast.error("Invalid credentials");
+      } else if (err.response.status === 404) {
+        toast.error(err.response.data.message);
       } else {
         toast.error("Something went wrong");
       }
-
     } finally {
       setLoading(false); // 🔥 always re-enable
     }
@@ -57,7 +57,7 @@ export default function LoginPage() {
 
   return (
     <Form onSubmit={handleLogin}>
-      <LoginHeader
+      <FormHeader
         headerText={"Sign in"}
         pText={"Sign in below to access your account"}
       />
@@ -70,6 +70,14 @@ export default function LoginPage() {
             onChange={handleChange}
           />
         ))}
+        <div className="">
+          <a
+            href="#"
+            className="font-medium text-blue-400 hover:text-blue-500 hover:transition-all"
+          >
+            Forgot your password?
+          </a>{" "}
+        </div>
         <Button type="submit" text={"Sign in"} />
         <FormFooter text={"Don’t have an account yet?"} linkText={"sign up"} />
       </div>

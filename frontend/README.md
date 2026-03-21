@@ -28,4 +28,7 @@ npm install clsx tailwind-merge  xxxx
 ## Install tostify
 npm install react-toastify 
 
-react-router-dom react-toastify jwt-decode
+## Install react Router
+npm install react-router-dom 
+
+react-toastify jwt-decode

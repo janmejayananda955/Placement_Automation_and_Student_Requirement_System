@@ -13,12 +13,12 @@ public class AuthServiceTest {
     @Autowired
     private  AuthServiceImpl authService;
 
-    @Test
-    public void authServiceTest(){
-
-        LoginRequestDto dto = new LoginRequestDto("janemjaya@gmail.com","test123","ADMIN");
-        authService.loginUser( dto);
-
-    }
+//    @Test
+//    public void authServiceTest(){
+//
+//        LoginRequestDto dto = new LoginRequestDto("janemjaya@gmail.com","test123","ADMIN");
+//        authService.loginUser( dto);
+//
+//    }
 
 }

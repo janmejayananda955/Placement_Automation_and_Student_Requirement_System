@@ -3,13 +3,16 @@ package com.college.project.PlacementAutomationandStudentRequirementSystem.auth.
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginResponseDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.RegisterRequestDto;
-import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.RegisterResponseDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;
+
+import java.util.List;
 
 
 public interface AuthService {
 
-    RegisterResponseDto registerUser(RegisterRequestDto loginRequestDto);
+    ApiResponse<?> registerUser(RegisterRequestDto loginRequestDto);
 
-    LoginResponseDto loginUser(LoginRequestDto loginRequestDto);
+    ApiResponse<LoginResponseDto> loginUser(LoginRequestDto loginRequestDto);
 
+    List<?> getRoles();
 }

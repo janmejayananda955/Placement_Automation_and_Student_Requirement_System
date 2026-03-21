@@ -28,6 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public ApiResponse<?> addCompany(CompanyRequestDto companyRequestDto) {
+
         if (companyRepository.existsByNameAndWebsite(companyRequestDto.getName(),companyRequestDto.getWebsite())){
             throw new ResourceAlreadyExistsException("already company registered");
         }
