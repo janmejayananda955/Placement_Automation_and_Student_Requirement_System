@@ -1,5 +1,6 @@
 package com.college.project.PlacementAutomationandStudentRequirementSystem.auth.service.impl;
 
+import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.ForgotPasswordRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginResponseDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.RegisterRequestDto;
@@ -44,8 +45,9 @@ public class AuthServiceImpl implements AuthService {
             throw new ResourceAlreadyExistsException("Admin registration is not allowed");
         }
 
-        String userRole = authUtil.getCurrentUserRole();
-        Role role = roleRepository.findByRoleName(userRole)
+//        String userRole = authUtil.getCurrentUserRole();
+//        System.out.println(userRole);
+        Role role = roleRepository.findByRoleName(registerRequestDto.getRole())
                 .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
 
         if (userRepository.existsByEmail(registerRequestDto.getEmail())) {
@@ -85,5 +87,20 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public List<?> getRoles() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public ApiResponse<?> forgotPassword(ForgotPasswordRequestDto forgotPasswordRequestDto) {
+
+        User user = userRepository.findByEmail(forgotPasswordRequestDto.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        String validationCode = authUtil.generateValidationCode();
+        System.out.println("Validation code for forgot password"+ validationCode);
+
+        // send validation code to user email
+        // verify it
+
+
+        return null;
     }
 }

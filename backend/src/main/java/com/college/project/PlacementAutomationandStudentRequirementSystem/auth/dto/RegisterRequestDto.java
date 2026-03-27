@@ -20,6 +20,6 @@ public class RegisterRequestDto {
     private String password;
 
     @NotBlank(message = "Role is required")  // ← blocks request if role not sent, only allow student and recruiter
-    @Pattern(regexp = "^(STUDENT|RECRUITER)$", message = "Invalid role")
+    @Pattern(regexp = "^(?i)(STUDENT|RECRUITER)$", message = "Invalid role")
     private String role;
 }

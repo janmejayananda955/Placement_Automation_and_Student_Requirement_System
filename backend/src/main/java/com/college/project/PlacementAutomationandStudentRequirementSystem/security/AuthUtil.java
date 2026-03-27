@@ -11,6 +11,7 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
 
 @Component
 public class AuthUtil {
@@ -111,5 +112,10 @@ public class AuthUtil {
 
     public String extractRole(String token) {
         return extractAllClaims(token).get("role", String.class);
+    }
+
+    // Used for create new validation code
+    public String generateValidationCode() {
+        return String.format("%06d", new Random().nextInt(1000000));
     }
 }

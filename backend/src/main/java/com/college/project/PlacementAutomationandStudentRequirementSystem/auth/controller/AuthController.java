@@ -1,5 +1,6 @@
 package com.college.project.PlacementAutomationandStudentRequirementSystem.auth.controller;
 
+import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.ForgotPasswordRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.LoginResponseDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.auth.dto.RegisterRequestDto;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${ALLOWED_ORIGINS}")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -38,6 +39,11 @@ public class AuthController {
     @GetMapping("/roles")
     public ResponseEntity<List<?>> getRoles(){
         return ResponseEntity.status(HttpStatus.OK).body(authServiceimpl.getRoles());
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<?>> forgotPassword(@RequestBody @Valid ForgotPasswordRequestDto forgotPasswordRequestDto){
+        return ResponseEntity.status(HttpStatus.OK).body(authServiceimpl.forgotPassword(forgotPasswordRequestDto));
     }
 
 }
