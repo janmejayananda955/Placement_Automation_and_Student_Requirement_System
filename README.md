@@ -1,32 +1,49 @@
-# Placement Automation and Student Requirement System
+# Project Documentation
 
-## Project Overview
-This project aims to automate the placement process and manage student requirements efficiently.
+## Tech Stack
+- **Java**: 21
+- **Spring Boot**
+- **React**: 19
+- **Vite**
+- **Tailwind CSS**
+
+## Implemented Features
+- Authentication
+- User Management
+- Student Profiles
+- Company Management
+- Job Posting
+- Job Applications
+- Security
 
 ## Deployment Links
-- **Frontend**: [Netlify](https://your-netlify-link)
-- **Backend**: [Render](https://your-render-link)
-- **Database**: [Neon DB](https://your-neon-link)
+- **Frontend**: [Placement Automation System](https://janmejaya-placement-automation-system.netlify.app)
+- **Backend**: [Placement Automation Backend](https://placement-automation-and-student.onrender.com)
+- **Database**: [Neon DB](#)
 
-## Features
-- Automated placement system
-- Requirement management for students
+## API Endpoints
+- **Authentication**: `/api/auth`
+- **Users**: `/api/users`
+- **Students**: `/api/students`
+- **Companies**: `/api/companies`
+- **Jobs**: `/api/jobs`
 
-## Technologies Used
-- React for frontend
-- Node.js and Express for backend
-- MongoDB for the database
+## User Roles
+- **Admin**: Can manage all resources.
+- **User**: Can manage their own profile and apply for jobs.
 
-## Installation Instructions
-1. Clone the repo
-2. Install dependencies
-3. Start the application
+## Architecture
+- The project follows a microservices architecture with separate services for the frontend and backend.
 
-## Usage
-Instructions on how to use the application.
+## Setup Instructions
+1. Clone the repository.
+2. Install dependencies for both frontend and backend.
+3. Run the backend server.
+4. Start the frontend application.
 
-## Contributing
-Guidelines for how to contribute to the project.
+## Authentication Flow
+- Users authenticate through the `/api/auth` endpoint, receiving a token for authorized access.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+*Last Updated: 2026-03-27 22:03:52*
