@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../../components/layout/Sidebar";
 import Header from "../../../components/layout/Header";
-import { studentNavigationLinks } from "../../../config/student/studentConfig";
+import { recruiterNavigationLinks } from "../../../config/recruiter/recruiterConfig";
 
-const studentTheme = {
-  gradient: "from-blue-500 to-indigo-600",
-  bgActive: "bg-blue-500 shadow-blue-500/30",
-  textHover: "hover:text-blue-600 dark:hover:text-blue-400",
-  bgHover: "hover:bg-blue-50 dark:hover:bg-slate-800/50"
+const recruiterTheme = {
+  gradient: "from-emerald-500 to-teal-600",
+  bgActive: "bg-emerald-500 shadow-emerald-500/30",
+  textHover: "hover:text-emerald-600 dark:hover:text-emerald-400",
+  bgHover: "hover:bg-emerald-50 dark:hover:bg-slate-800/50"
 };
 
-const StudentLayout = () => {
+const RecruiterLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-bg-light dark:bg-bg-dark text-slate-800 dark:text-slate-100 flex transition-colors duration-300">
       
       <Sidebar 
-        title="Student Space"
-        navigation={studentNavigationLinks}
-        theme={studentTheme}
+        title="Recruiter Hub"
+        navigation={recruiterNavigationLinks}
+        theme={recruiterTheme}
         sidebarOpen={sidebarOpen} 
         setSidebarOpen={setSidebarOpen} 
       />
@@ -29,9 +29,9 @@ const StudentLayout = () => {
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         
         <Header 
-          titleText="Welcome back, Student 👋"
+          titleText="Welcome back, Recruiter 👋"
           setSidebarOpen={setSidebarOpen} 
-          theme={studentTheme}
+          theme={recruiterTheme}
         />
 
         {/* Page Content */}
@@ -45,4 +45,4 @@ const StudentLayout = () => {
   );
 };
 
-export default StudentLayout;
+export default RecruiterLayout;
