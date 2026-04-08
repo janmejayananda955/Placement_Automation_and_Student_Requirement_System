@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/students")
@@ -59,7 +60,7 @@ public class StudentController {
     @PreAuthorize("hasAnyRole('RECRUITER', 'ADMIN')")
     //access by Recruiter and admin see one particular student
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<StudentProfileAdminResponseDto>> getStudent(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<StudentProfileAdminResponseDto>> getStudent(@PathVariable UUID id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(studentServiceImpl.getProfileById(id));

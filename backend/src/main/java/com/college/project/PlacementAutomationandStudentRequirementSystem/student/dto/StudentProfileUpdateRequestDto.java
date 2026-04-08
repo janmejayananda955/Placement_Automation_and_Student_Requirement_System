@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class StudentProfileUpdateRequestDto {
-    private Long userId;
+    private UUID userId;
     private String name;
     private String branch;
     private Float cgpa;

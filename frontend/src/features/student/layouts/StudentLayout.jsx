@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../../components/layout/Sidebar";
-import Header from "../../../components/layout/Header";
-import { studentNavigationLinks } from "../../../config/student/studentConfig";
-
-const studentTheme = {
-  gradient: "from-blue-500 to-indigo-600",
-  bgActive: "bg-blue-500 shadow-blue-500/30",
-  textHover: "hover:text-blue-600 dark:hover:text-blue-400",
-  bgHover: "hover:bg-blue-50 dark:hover:bg-slate-800/50"
-};
+import StudentSidebar from "../components/layout/StudentSidebar";
+import StudentHeader from "../components/layout/StudentHeader";
 
 const StudentLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,22 +9,12 @@ const StudentLayout = () => {
   return (
     <div className="min-h-screen bg-bg-light dark:bg-bg-dark text-slate-800 dark:text-slate-100 flex transition-colors duration-300">
       
-      <Sidebar 
-        title="Student Space"
-        navigation={studentNavigationLinks}
-        theme={studentTheme}
-        sidebarOpen={sidebarOpen} 
-        setSidebarOpen={setSidebarOpen} 
-      />
+      <StudentSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         
-        <Header 
-          titleText="Welcome back, Student 👋"
-          setSidebarOpen={setSidebarOpen} 
-          theme={studentTheme}
-        />
+        <StudentHeader setSidebarOpen={setSidebarOpen} />
 
         {/* Page Content */}
         <div className="flex-1 overflow-auto p-6 lg:p-10">

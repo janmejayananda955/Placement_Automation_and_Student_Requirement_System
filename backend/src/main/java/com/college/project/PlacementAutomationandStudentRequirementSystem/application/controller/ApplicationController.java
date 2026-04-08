@@ -2,6 +2,7 @@ package com.college.project.PlacementAutomationandStudentRequirementSystem.appli
 
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationSummaryDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.StudentDashboardDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.UpdateStatusRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.service.impl.ApplicationServiceImpl;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;
@@ -49,5 +50,11 @@ public class ApplicationController {
                     .body(applicationService.widhdrawApplication(id));
         }
 
+    @PreAuthorize("hasRole('STUDENT')")
+    @GetMapping("/student-dashboard")
+    public ResponseEntity<ApiResponse<StudentDashboardDto>> getTotalApplications() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(applicationService.getStudentDashboard());
+    }
 
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Briefcase, Building2, MapPin, DollarSign, Clock } from "lucide-react";
 import { Button } from "../../components/ui/Button"; // Assuming reusable button exists
 
-const JobCard = ({ job, onApply }) => {
+const JobCard = ({ job, onApply, actionText, onAction, onEdit, onClose }) => {
   return (
     <div className="group bg-white dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200 dark:border-slate-700 p-6 rounded-2xl hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1 transition-all duration-300 w-full">
       <div className="flex justify-between items-start gap-4">
@@ -55,12 +55,31 @@ const JobCard = ({ job, onApply }) => {
             </span>
           ))}
         </div>
-        <button 
-          onClick={onApply}
-          className="px-5 py-2.5 bg-slate-900 dark:bg-blue-600 text-white dark:text-white rounded-xl font-medium text-sm hover:bg-slate-800 dark:hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 transition-all"
-        >
-          Apply Now
-        </button>
+        <div className="flex items-center gap-3">
+          {onClose && (
+            <button onClick={onClose} className="px-3 py-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/50 text-sm font-medium transition-colors">
+              Close
+            </button>
+          )}
+          {onEdit && (
+            <button onClick={onEdit} className="px-3 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 text-sm font-medium transition-colors">
+              Edit
+            </button>
+          )}
+          {actionText && onAction && (
+             <button onClick={onAction} className="px-4 py-2 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/30 text-sm font-medium transition-colors">
+               {actionText}
+             </button>
+          )}
+          {onApply && (
+            <button 
+              onClick={onApply}
+              className="px-5 py-2.5 bg-slate-900 dark:bg-blue-600 text-white dark:text-white rounded-xl font-medium text-sm hover:bg-slate-800 dark:hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 transition-all"
+            >
+              Apply Now
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

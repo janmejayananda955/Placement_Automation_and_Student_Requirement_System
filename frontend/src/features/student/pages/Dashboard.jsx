@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { dashboardStatsConfig, mockApplications } from "../../../config/student/studentConfig";
 import StatCard from "../components/dashboard/StatCard";
 import RecentApplications from "../components/dashboard/RecentApplications";
 import ProfileStrength from "../components/dashboard/ProfileStrength";
+import { getStudentDashboardStats } from "../services/studentService";
 
 const Dashboard = () => {
+  const [totalApplications, setTotalApplications] = useState(0);
+  const [interviewsScheduled, setInterviewsScheduled] = useState(0);
+  const [offersReceived, setOffersReceived] = useState(0);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const { data } = await getStudentDashboardStats();
+        // The backend should return an object containing the three stats
+        if (data?.data) {
+          setTotalApplications(data.data.totalApplications || data.data.totalApps || 0);
+          setInterviewsScheduled(data.data.interviewsScheduled || data.data.interviews || 0);
+          setOffersReceived(data.data.offersReceived || data.data.offers || 0);
+        }
+      } catch (err) {
+        console.error("Error fetching dashboard stats:", err);
+      }
+    };
+    fetchStats();
+  }, []);
+
+  const getDynamicValue = (id) => {
+    if (id === "total_apps") return totalApplications;
+    if (id === "interviews") return interviewsScheduled;
+    if (id === "offers") return offersReceived;
+    return 0;
+  };
+
   return (
     <div className="space-y-8">
       
@@ -27,7 +56,7 @@ const Dashboard = () => {
       {/* Structured Stats Grid mapping over config using micro-component */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {dashboardStatsConfig.map((stat) => (
-          <StatCard key={stat.id} {...stat} />
+          <StatCard key={stat.id} {...stat} value={getDynamicValue(stat.id)} />
         ))}
       </div>
 

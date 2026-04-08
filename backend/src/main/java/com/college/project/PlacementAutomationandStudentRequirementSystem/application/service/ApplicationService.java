@@ -2,6 +2,7 @@ package com.college.project.PlacementAutomationandStudentRequirementSystem.appli
 
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationSummaryDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.StudentDashboardDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.UpdateStatusRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;
 
@@ -16,4 +17,6 @@ public interface ApplicationService {
     ApiResponse<?> updateApplicationStatus(UUID id, UpdateStatusRequestDto updateStatusRequestDto);
 
     ApiResponse<?> widhdrawApplication(UUID id);
+
+    ApiResponse<StudentDashboardDto> getStudentDashboard();
 }

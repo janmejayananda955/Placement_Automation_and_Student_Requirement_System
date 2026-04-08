@@ -2,6 +2,7 @@ package com.college.project.PlacementAutomationandStudentRequirementSystem.appli
 
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.ApplicationSummaryDto;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.StudentDashboardDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.dto.UpdateStatusRequestDto;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.entity.Application;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.application.entity.util.ApplicationStatus;
@@ -11,12 +12,14 @@ import com.college.project.PlacementAutomationandStudentRequirementSystem.except
 import com.college.project.PlacementAutomationandStudentRequirementSystem.exception.ResourceNotFoundException;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.job.entity.Job;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.job.repository.JobRepository;
+import com.college.project.PlacementAutomationandStudentRequirementSystem.security.AuthUtil;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.user.entity.User;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.user.repository.UserRepository;
 import com.college.project.PlacementAutomationandStudentRequirementSystem.util.ApiResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +34,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final JobRepository jobRepository;
+    private final AuthUtil authUtil;
 
     //copy from gpt
     private static final Map<ApplicationStatus, List<ApplicationStatus>> allowedTransitions = Map.of(
@@ -82,6 +86,19 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
+    public ApiResponse<StudentDashboardDto> getStudentDashboard() {
+
+        UUID currentUserId = authUtil.getCurrentUserId();
+
+        User currentUser = userRepository.findById(currentUserId)
+                .orElseThrow(()-> new ResourceNotFoundException("User not exist"));
+
+        StudentDashboardDto dashboard = applicationRepository.getDashboardStats(currentUser);
+
+        return new ApiResponse<>( "Dashboard fetched",dashboard);
+    }
+
+    @Override
     public ApiResponse<List<ApplicationSummaryDto>> getAllApplications() {
         List<Application> applications = applicationRepository.findAll();
         List<ApplicationSummaryDto> dtoList = applications.stream()
@@ -96,7 +113,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         return new ApiResponse<>("Application fetch successfully", dtoList);
     }
-
 
 
 

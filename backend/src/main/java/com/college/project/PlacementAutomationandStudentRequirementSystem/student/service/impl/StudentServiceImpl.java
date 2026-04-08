@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public ApiResponse<?> createStudentProfile(StudentProfileRequestDto studentProfileRequestDto) {
 //        get id from token
-        Long id = authUtil.getCurrentUserId();
+        UUID id = authUtil.getCurrentUserId();
 
         // Find user through userid by DTO
         User user = userRepository.findById(id)
@@ -98,7 +99,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ApiResponse<?> getProfileEmail() {
 
-        Long id = authUtil.getCurrentUserId();
+        UUID id = authUtil.getCurrentUserId();
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -110,7 +111,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ApiResponse<StudentProfileAdminResponseDto> getProfileById(Long id) {
+    public ApiResponse<StudentProfileAdminResponseDto> getProfileById(UUID id) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User not exists"));
         StudentProfileAdminResponseDto dto =
