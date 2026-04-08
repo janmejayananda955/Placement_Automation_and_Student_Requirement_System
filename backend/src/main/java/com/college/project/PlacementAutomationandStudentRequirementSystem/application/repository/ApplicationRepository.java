@@ -32,4 +32,7 @@ FROM Application a
 WHERE a.student = :student
 """)
     StudentDashboardDto getDashboardStats(@Param("student") User student);
+    int countByStudent(User currentUser);
+
+    int countByStudentAndStatus(User currentUser, ApplicationStatus applicationStatus);
 }
